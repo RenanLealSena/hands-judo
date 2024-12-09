@@ -44,12 +44,12 @@ Este projeto utiliza **OpenCV**, **MediaPipe** e **Colorama** para analisar víd
 
 1. Insira o caminho do vídeo na variável `video_path`:
    ```python
-   video_path = 'assets/videos/test_0.mp4'
+   video_path = 'caminho_do_video.mp4'
    ```
 
 2. Execute o script:
    ```bash
-   python main.py
+   python app.py
    ```
 
 3. O vídeo será exibido com informações sobre o status das pegadas. O terminal indicará o vencedor com cores específicas:
