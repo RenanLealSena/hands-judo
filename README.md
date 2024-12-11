@@ -1,103 +1,87 @@
-### README.md
+README.md
 
-# Analisador de Pegadas de Judô
+Analisador de Pegadas de Judô com Rastreamento de Mãos
 
-Este projeto utiliza **OpenCV**, **MediaPipe** e **Colorama** para analisar vídeos de judô e determinar qual atleta mantém a pegada ativa por mais de 7 segundos. Os atletas são identificados pela cor do kimono (azul ou branco).
+Este projeto utiliza OpenCV, MediaPipe e NumPy para analisar vídeos de judô e detectar a presença de pegadas entre atletas com base no rastreamento de mãos e na identificação da cor dos kimonos (azul ou branco).
 
----
+Funcionalidades
+	•	Identificação de Atletas: Detecta os kimonos azul e branco usando máscaras HSV.
+	•	Rastreamento de Mãos: Utiliza MediaPipe para rastrear as mãos em tempo real.
+	•	Análise de Pegada: Monitora o tempo que os atletas permanecem ativos e identifica pegadas ativas.
+	•	Exibição Visual: Mostra as mãos detectadas e o status das pegadas diretamente no vídeo.
+	•	Integração com Jupyter Notebook: Exibe os quadros processados no ambiente do Jupyter Notebook.
 
-## Funcionalidades
+Configuração do Ambiente
 
-- **Identificação dos Atletas:** Detecta a cor dos kimonos (azul e branco) no vídeo.  
-- **Detecção de Mãos:** Usa MediaPipe para rastrear as mãos de ambos os atletas.  
-- **Análise de Pegada:** Calcula o tempo em que cada atleta mantém a pegada ativa.  
-- **Filtro Kalman:** Suaviza os movimentos para maior precisão na análise.  
-- **Exibição do Vencedor:** Indica no terminal qual atleta manteve a pegada ativa por mais tempo.  
+Pré-requisitos
+	•	Python 3.7+
+	•	Bibliotecas:
+	•	opencv-python
+	•	mediapipe
+	•	numpy
+	•	pillow
+	•	jupyter (opcional, se for rodar em Jupyter Notebook)
 
----
+Instalação
+	1.	Clone o repositório:
 
-## Configuração do Ambiente
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
 
-### Pré-requisitos
-- **Python 3.7+**  
-- Bibliotecas:
-  - `opencv-python`
-  - `mediapipe`
-  - `numpy`
-  - `colorama`
 
-### Instalação
-1. Clone o repositório:  
-   ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-   cd nome-do-repositorio
-   ```
+	2.	Entre no diretório do projeto:
 
-2. Instale as dependências:  
-   ```bash
-   pip install opencv-python mediapipe numpy colorama
-   ```
+cd nome-do-repositorio
 
----
 
-## Como usar
+	3.	Instale as dependências:
 
-1. Insira o caminho do vídeo na variável `video_path`:
-   ```python
-   video_path = 'caminho_do_video.mp4'
-   ```
+pip install opencv-python mediapipe numpy pillow
 
-2. Execute o script:
-   ```bash
-   python app.py
-   ```
 
-3. O vídeo será exibido com informações sobre o status das pegadas. O terminal indicará o vencedor com cores específicas:
-   - **Azul:** Atleta azul ganhou a pegada!  
-   - **Vermelho:** Atleta branco ganhou a pegada!  
+	4.	(Opcional) Instale o Jupyter Notebook:
 
-4. Pressione **Q** para sair.
+pip install notebook
 
----
+Como usar
+	1.	Insira o caminho do vídeo na variável video_path:
 
-## Estrutura do Código
+video_path = 'caminho/do/video.mp4'
 
-### Módulos Principais
-- **Detecção de Cor:** Identifica as cores azul e branca no quadro usando máscaras HSV.  
-- **Rastreamento de Mãos:** Detecta e desenha landmarks das mãos dos atletas.  
-- **Análise de Pegada:** Verifica se a pegada foi mantida por mais de 7 segundos.  
-- **Exibição de Informações:** Mostra o status das pegadas na tela e no terminal.  
 
-### Personalização
-- **Intervalos de Cor:** Ajuste os intervalos HSV na função `detectar_kimono_cor` para outras cores.  
-- **Tempo da Pegada:** Modifique o valor `7` na função `verificar_pegada` para alterar a duração necessária.  
+	2.	Execute o script em um ambiente Python ou Jupyter Notebook:
 
----
+python app.py
 
-## Saídas
+Ou, se estiver usando Jupyter Notebook, execute as células no arquivo .ipynb.
 
-### Na Tela
-O status das pegadas é exibido no canto superior esquerdo:  
-- **Pegada Azul:** Ativa ou Inativa.  
-- **Pegada Branco:** Ativa ou Inativa.  
+	3.	Durante a execução, o vídeo será processado quadro a quadro e exibido na saída do Jupyter Notebook.
 
-### No Terminal
-Mensagens indicam o vencedor com cores diferentes:
-- **Azul:**  
-  ```text
-  Atleta azul ganhou a pegada!
-  ```
-- **Vermelho:**  
-  ```text
-  Atleta branco ganhou a pegada!
-  ```
+Personalização
+	•	Intervalos de Cor: Ajuste os valores HSV nas variáveis azul_baixo, azul_alto, branco_baixo e branco_alto para detectar diferentes cores de kimonos.
+	•	Tolerância de Desaparecimento: Modifique a variável tolerancia_desaparecimento para ajustar o tempo que um atleta pode ficar sem ser detectado antes de considerar que não está mais ativo.
 
----
+Estrutura do Código
 
-## Contribuições
+Principais Componentes
+	•	Configuração do MediaPipe: Configura o rastreamento de mãos para processar quadros do vídeo.
+	•	Função detectar_kimono_cor: Detecta as cores azul e branca nos quadros usando máscaras HSV.
+	•	Função desenhar_status: Exibe o status das pegadas (ativa ou inativa) no vídeo.
+	•	Loop Principal: Processa o vídeo quadro a quadro, detecta as mãos e atualiza os estados dos atletas.
+
+Saídas
+
+No Jupyter Notebook
+	•	Os quadros do vídeo são exibidos com:
+	•	Rastreamento de Mãos: Posições das mãos destacadas com landmarks.
+	•	Status das Pegadas: Indicadores de “Ativa” ou “Inativa” para os atletas azul e branco.
+
+No Terminal
+	•	Mensagens de erro ou fim de vídeo são exibidas no terminal.
+
+Contribuições
+
 Contribuições são bem-vindas! Envie melhorias, correções ou ideias através de pull requests.
 
----
+Licença
 
-## Licença
-Este projeto é distribuído sob a licença [MIT](LICENSE).  
+Este projeto é distribuído sob a licença MIT.
