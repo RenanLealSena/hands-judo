@@ -4,6 +4,7 @@ import time
 import numpy as np
 from IPython.display import display, clear_output
 from PIL import Image
+from colorama import Fore
 
 # Configuração da detecção de mãos MediaPipe
 mp_hands = mp.solutions.hands
@@ -19,8 +20,12 @@ tempo_desaparecido_branco = 0
 tolerancia_desaparecimento = 2
 vencedor = None
 
+# Função para verificar se a pegada foi mantida por 7 segundos
+def verificar_pegada(tempo_inicio, tempo_atual):
+    return (tempo_atual - tempo_inicio) >= 7
+
 # Inicialização do vídeo
-video_path = 'caminho_do_video.mp4'
+video_path = 'assets/videos/test_0.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Funções auxiliares
@@ -65,6 +70,15 @@ while cap.isOpened():
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
             mp.solutions.drawing_utils.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+    # Verificar se a pegada foi mantida por 7 segundos
+    if verificar_pegada(tempo_inicio_azul, tempo_atual) and vencedor is None:
+        print(Fore.BLUE + "Atleta azul ganhou a pegada!")
+        vencedor = "azul"  # Marca que o atleta azul ganhou
+
+    if verificar_pegada(tempo_inicio_branco, tempo_atual) and vencedor is None:
+        print(Fore.RED + "Atleta branco ganhou a pegada!")
+        vencedor = "branco"  # Marca que o atleta branco ganhou
 
     # Atualizar status e exibir o frame no Jupyter
     desenhar_status(frame, atleta_azul, atleta_branco)
