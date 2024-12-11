@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import time
 import numpy as np
-from IPython.display import display, clear_output
+from IPython.display import display
 from PIL import Image
 from colorama import Fore
 
@@ -82,7 +82,11 @@ while cap.isOpened():
 
     # Atualizar status e exibir o frame no Jupyter
     desenhar_status(frame, atleta_azul, atleta_branco)
-    clear_output(wait=True)
-    display(Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)))
+    
+    # Mostrar o frame
+    display(Image.fromarray(frame))  # Display diretamente como BGR
+
+    # Adicionando um pequeno delay para o Jupyter processar a exibição
+    time.sleep(0.05)
 
 cap.release()
