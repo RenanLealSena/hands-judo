@@ -101,8 +101,6 @@ Este projeto utiliza o **MediaPipe**, **OpenCV**, e o **Filtro Kalman** para ras
 
 ## 📜 **Dependências**
 
-Certifique-se de ter o Python 3.x instalado em seu sistema, junto com as bibliotecas necessárias. Para isso, utilize o comando abaixo para instalar os pacotes necessários:
-
 - [OpenCV](https://opencv.org/)  
 - [MediaPipe](https://mediapipe.dev/)  
 - [NumPy](https://numpy.org/)  
