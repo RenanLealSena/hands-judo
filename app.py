@@ -69,7 +69,7 @@ def detectar_kimono_cor(frame_hsv, frame):
     return atleta_azul, atleta_branco
 
 # Abrir vídeo
-video_path = 'assets/videos/test_3.mp4' 
+video_path = 'caminho_do_video.mp4' 
 cap = cv2.VideoCapture(video_path)
 
 # Verificar se o vídeo foi aberto corretamente
